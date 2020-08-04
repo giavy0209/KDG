@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "reactnative",
-    "slug": "reactnative",
+    "name": "KDGAPP",
+    "slug": "KDGAPP",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.kdg.kdg",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.kdg.kdg",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
