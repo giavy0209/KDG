@@ -1,7 +1,7 @@
-const transition = (duration, firstState, lastState, setState)=>{
+const transition = (duration, firstState, lastState, setState,interval)=>{
     var startTime = new Date().getTime();
     var transitionRange = lastState - firstState;
-    var interval = setInterval(() => {
+    interval = setInterval(() => {
         var time = new Date().getTime()
         if((time - startTime) < duration){
             var timeSpend = time - startTime

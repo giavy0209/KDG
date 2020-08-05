@@ -2,11 +2,11 @@ import React, { useState, useCallback,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ScrollView, View, TextInput, Text, TouchableOpacity,Alert,ImageBackground, Image , Linking} from 'react-native';
-import styles from '../styles/mainStyle'
-import calAPI from '../axios'
-import bg from '../assets/images/bg.jpg'
-import ticker from '../assets/images/ticker.png'
-import {transition} from '../helper'
+import {mainStyles as styles} from '../../styles/'
+import calAPI from '../../axios'
+import bg from '../../assets/images/bg.jpg'
+import ticker from '../../assets/images/ticker.png'
+import {transition} from '../../helper'
 
 export default function App({ navigation }) {
 

@@ -2,12 +2,12 @@ import React, { useState, useCallback , useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { View, TextInput, Text,  TouchableOpacity,Alert,ImageBackground, Image,ScrollView} from 'react-native';
-import styles from '../styles/mainStyle'
-import calAPI from '../axios'
-import bg from '../assets/images/bg.jpg'
-import logo from '../assets/images/logo.png'
+import {mainStyles as styles} from '../../styles/'
+import calAPI from '../../axios'
+import bg from '../../assets/images/bg.jpg'
+import logo from '../../assets/images/logo.png'
 
-import {transition} from '../helper'
+import {transition} from '../../helper'
 export default function App({navigation}) {
     const [Email, setEmail] = useState("")
     const [EmailFocus, setEmailFocus] = useState(false)

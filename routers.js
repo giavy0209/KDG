@@ -1,14 +1,14 @@
 import React from 'react';
-import Home from './components/Home'
+import Start from './components/Start'
 import Reg from './components/Reg'
 import Login from './components/Login'
 import ForgotPassword from './components/ForgotPassword'
 const ROUTERS = [
     {
-        name: 'Home',
+        name: 'Start',
         reqLogin: false,
         title: null,
-        render : Home
+        render : Start
     },
     {
         name: 'Login',

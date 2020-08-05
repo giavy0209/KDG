@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {StyleSheet } from 'react-native';
-import { Roboto_400Regular} from '@expo-google-fonts/roboto';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
