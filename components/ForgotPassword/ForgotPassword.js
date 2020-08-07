@@ -7,7 +7,7 @@ import calAPI from '../../axios'
 import bg from '../../assets/images/bg.jpg'
 import {transition} from '../../helper'
 
-import Header from '../Header'
+import {Header1} from '../Header'
 export default function App({ navigation }) {
 
     const [ToggleCheckBox, setToggleCheckBox] = useState(false)
@@ -114,75 +114,71 @@ export default function App({ navigation }) {
     }, [IsShowPassword])
 
     return (
-        <View style={styles.container}>
-            <Header title="Quên mật khẩu"/>
-            <ScrollView>
-                <ImageBackground source={bg} style={[styles.bg, {paddingTop: 90}]}>
-                    <View style={styles.formBlock}>
-                        <View style={[styles.inputBlock, {marginTop: 0}]}>
-                            <Text style={[styles.placeHolderText,{bottom: EmailTextPosition , fontSize: EmailTextSize}, EmailFocus && {color: '#8a8c8e'}]}>Email</Text>
-                            <TextInput 
-                            onFocus={()=>{Email !== '' || !EmailFocus && setEmailFocus(true)}} 
-                            onBlur={()=>{Email ==='' && setEmailFocus(false)}} 
-                            onChangeText={value => setEmail(value)} 
-                            value={Email} 
-                            style={styles.input} />
-                        </View>
+        <View style={[styles.container]}>
+            <Header1 title="Quên mật khẩu"/>
+            <View style={[styles.formBlock,{paddingHorizontal: 30, paddingTop: 60}]}>
+                <View style={[styles.inputBlock, {marginTop: 0}]}>
+                    <Text style={[styles.placeHolderText,{bottom: EmailTextPosition , fontSize: EmailTextSize}, EmailFocus && {color: '#8a8c8e'}]}>Email</Text>
+                    <TextInput 
+                    onFocus={()=>{Email !== '' || !EmailFocus && setEmailFocus(true)}} 
+                    onBlur={()=>{Email ==='' && setEmailFocus(false)}} 
+                    onChangeText={value => setEmail(value)} 
+                    value={Email} 
+                    style={styles.input} />
+                </View>
 
-                        <View style={[styles.inputBlock]}>
-                            <Text style={[styles.placeHolderText,{bottom: EmailCodeTextPosition , fontSize: EmailCodeTextSize}, EmailCodeFocus && {color: '#8a8c8e'}]}>Mã xác minh Email</Text>
-                            <TextInput 
-                            onFocus={()=>{EmailCode !== '' || !EmailCodeFocus && setEmailCodeFocus(true)}} 
-                            onBlur={()=>{EmailCode ==='' && setEmailCodeFocus(false)}} 
-                            onChangeText={value => setEmailCode(value)} 
-                            value={EmailCode} 
-                            style={[styles.input,{width: '84%'}]} />
-                            <TouchableOpacity style={{width: 50}} onPress={reqMailCode}><Text style={[{color: '#fac800', opacity: 0.4},Email !=='' && {opacity: 1}]}>Lấy mã</Text></TouchableOpacity>
-                        </View>
+                <View style={[styles.inputBlock]}>
+                    <Text style={[styles.placeHolderText,{bottom: EmailCodeTextPosition , fontSize: EmailCodeTextSize}, EmailCodeFocus && {color: '#8a8c8e'}]}>Mã xác minh Email</Text>
+                    <TextInput 
+                    onFocus={()=>{EmailCode !== '' || !EmailCodeFocus && setEmailCodeFocus(true)}} 
+                    onBlur={()=>{EmailCode ==='' && setEmailCodeFocus(false)}} 
+                    onChangeText={value => setEmailCode(value)} 
+                    value={EmailCode} 
+                    style={[styles.input,{width: '84%'}]} />
+                    <TouchableOpacity style={{width: 50}} onPress={reqMailCode}><Text style={[{color: '#fac800', opacity: 0.4},Email !=='' && {opacity: 1}]}>Lấy mã</Text></TouchableOpacity>
+                </View>
 
-                        <View style={[styles.inputBlock,{flexDirection: 'column'}]}>
-                            <View style={[styles.inputBlock, {marginTop: 0}]}>
-                                <Text style={[styles.placeHolderText,{bottom: PasswordTextPosition , fontSize: PasswordTextSize}, PasswordFocus && {color: '#8a8c8e'}]}>Mật khẩu mới</Text>
-                                <TextInput 
-                                onFocus={()=>{Password !== '' || !PasswordFocus && setPasswordFocus(true)}} 
-                                onBlur={()=>{Password === '' && setPasswordFocus(false)}}
-                                onLayout={e => setInputPasswordHeight(e.nativeEvent.layout.height)} 
-                                onChangeText={value => setPassword(value)} 
-                                value={Password} 
-                                style={styles.input} 
-                                secureTextEntry={!IsShowPassword} 
-                                />
-                                <TouchableOpacity
-                                onLayout={e => setInputPasswordEyeHeight(e.nativeEvent.layout.height)}
-                                onPress={ToggleShowPassword}
-                                style={[styles.showPasswordButton,{top: (InputPasswordHeight / 2) - (InputPasswordEyeHeight / 2),}]}
-                                >
-                                    <FontAwesomeIcon style={styles.eyeStyle} icon={IsShowPassword ? faEye : faEyeSlash}/>
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={{fontSize: 13, fontFamily: 'Roboto_300Light_Italic', fontStyle: 'italic', color: '#8a8c8e', paddingLeft:8}}>Từ 8 - 20 ký tự, phải bao gồm chữ, số, ký tự và ít nhất một chữ viết hoa</Text>
-                        </View>
-
-                        <View style={styles.inputBlock}>
-                            <Text style={[styles.placeHolderText,{bottom: RePasswordTextPosition , fontSize: RePasswordTextSize}, RePasswordFocus && {color: '#8a8c8e'}]}>Xác nhận mật khẩu</Text>
-                            <TextInput 
-                            onFocus={()=>{RePassword !== '' || !RePasswordFocus && setRePasswordFocus(true)}} 
-                            onBlur={()=>{RePassword ==='' && setRePasswordFocus(false)}} 
-                            onChangeText={value => setRePassword(value)} 
-                            value={RePassword} 
-                            style={styles.input} />
-                        </View>
-
-                        <TouchableOpacity onPress={getPassword} style={styles.button} >
-                            <Text style={styles.buttonText}>Xác nhận</Text>
+                <View style={[styles.inputBlock,{flexDirection: 'column'}]}>
+                    <View style={[styles.inputBlock, {marginTop: 0}]}>
+                        <Text style={[styles.placeHolderText,{bottom: PasswordTextPosition , fontSize: PasswordTextSize}, PasswordFocus && {color: '#8a8c8e'}]}>Mật khẩu mới</Text>
+                        <TextInput 
+                        onFocus={()=>{Password !== '' || !PasswordFocus && setPasswordFocus(true)}} 
+                        onBlur={()=>{Password === '' && setPasswordFocus(false)}}
+                        onLayout={e => setInputPasswordHeight(e.nativeEvent.layout.height)} 
+                        onChangeText={value => setPassword(value)} 
+                        value={Password} 
+                        style={styles.input} 
+                        secureTextEntry={!IsShowPassword} 
+                        />
+                        <TouchableOpacity
+                        onLayout={e => setInputPasswordEyeHeight(e.nativeEvent.layout.height)}
+                        onPress={ToggleShowPassword}
+                        style={[styles.showPasswordButton,{top: (InputPasswordHeight / 2) - (InputPasswordEyeHeight / 2),}]}
+                        >
+                            <FontAwesomeIcon style={styles.eyeStyle} icon={IsShowPassword ? faEye : faEyeSlash}/>
                         </TouchableOpacity>
                     </View>
-                    <View style={[styles.groupText,{justifyContent: 'center', marginTop: 24}]}>
-                        <Text style={{color: '#8a8c8e'}}>Đã nhớ mật khẩu?</Text>
-                        <TouchableOpacity onPress={()=>navigation.navigate('Login')}><Text style={[styles.linkText], {color: '#fac800'}}>  Đăng nhập</Text></TouchableOpacity>
-                    </View>
-                </ImageBackground>
-            </ScrollView>
+                    <Text style={{fontSize: 13, fontFamily: 'Roboto_300Light_Italic', fontStyle: 'italic', color: '#8a8c8e', paddingLeft:8}}>Từ 8 - 20 ký tự, phải bao gồm chữ, số, ký tự và ít nhất một chữ viết hoa</Text>
+                </View>
+
+                <View style={styles.inputBlock}>
+                    <Text style={[styles.placeHolderText,{bottom: RePasswordTextPosition , fontSize: RePasswordTextSize}, RePasswordFocus && {color: '#8a8c8e'}]}>Xác nhận mật khẩu</Text>
+                    <TextInput 
+                    onFocus={()=>{RePassword !== '' || !RePasswordFocus && setRePasswordFocus(true)}} 
+                    onBlur={()=>{RePassword ==='' && setRePasswordFocus(false)}} 
+                    onChangeText={value => setRePassword(value)} 
+                    value={RePassword} 
+                    style={styles.input} />
+                </View>
+
+                <TouchableOpacity onPress={getPassword} style={styles.button} >
+                    <Text style={styles.buttonText}>Xác nhận</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={[styles.groupText,{justifyContent: 'center', marginTop: 24}]}>
+                <Text style={{color: '#8a8c8e'}}>Đã nhớ mật khẩu?</Text>
+                <TouchableOpacity onPress={()=>navigation.replace('Login')}><Text style={[styles.linkText], {color: '#fac800'}}>  Đăng nhập</Text></TouchableOpacity>
+            </View>
         </View>
     );
 }

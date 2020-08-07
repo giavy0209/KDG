@@ -7,7 +7,7 @@ export default function Page1({ScreenHeight, ScreenWidth,Position,index}){
         <>
         <View style={[
             styles.page,
-            {left: (index - Position) * ScreenWidth - ScreenWidth  , width: ScreenWidth, height: ScreenHeight}
+            {left:Number(Position) ? (index - Position) * ScreenWidth - ScreenWidth : 0 , width: ScreenWidth, height: ScreenHeight}
         ]}>
             <Text style={{fontSize: ScreenWidth * 0.08, color: '#fff', marginTop: ScreenHeight * 0.33283, fontFamily: 'RobotoCondensed_300Light'}}>Chào mừng bạn đến với</Text>
             <Image source={kwtext} style={[styles.image,{marginTop: ScreenHeight * 0.02248}]}></Image>

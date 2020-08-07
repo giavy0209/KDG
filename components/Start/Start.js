@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { View, ImageBackground } from 'react-native';
+import React, { useState, useCallback, useEffect ,useRef} from 'react';
+import { View, Dimensions ,Animated} from 'react-native';
 import { mainStyles as styles } from '../../styles/'
-import bg from '../../assets/images/bg.jpg'
 import { transition } from '../../helper'
+import {useSelector} from 'react-redux'
 
 import Button from './Button'
 import Dots from './Dots'
@@ -12,70 +12,91 @@ import Page2 from './Page2'
 import Page3 from './Page3'
 import Page4 from './Page4'
 
-const listPasge = [Page1, Page2, Page3, Page4]
+const listPasge = [Page1]
 
 export default function App() {
-    const [ScreenHeight, setScreenHeight] = useState(0)
-    const [ScreenWidth, setScreenWidth] = useState(0)
+    const move = useRef(new Animated.Value(0)).current;
 
+    const ScreenWidth = useSelector(state=>state.width)
+    const ScreenHeight = useSelector(state=>state.height)
+
+    const [DotsPosition, setDotsPosition] = useState(0)
     const [ActivePage, setActivePage] = useState(0)
     const [Position, setPosition] = useState(0)
+    
+    const [TimeOutID, setTimeOutID] = useState()
+    const [TimeOutPage, setTimeOutPage] = useState(0)
 
     const count = useCallback((duration, targetTransition) => {
-        if(!duration) duration = 300
-        if(!targetTransition) targetTransition = ActivePage + 1
-        if (ActivePage < (listPasge.length - 1)) {
-            transition(duration, ActivePage,targetTransition, setPosition)
-            setActivePage(targetTransition)
-        }
-    }, [ActivePage])
+
+        // if(!duration) duration = 300
+        // if(!targetTransition) targetTransition = ActivePage + 1
+
+        // if (ActivePage < (listPasge.length - 1)) {
+        //     clearTimeout(TimeOutID)
+        //     transition(duration, ActivePage,targetTransition, setPosition)
+        //     setActivePage(targetTransition)
+        // }
+
+        Animated.timing(move, {
+            toValue: 2,
+            duration: 100,
+            useNativeDriver: true
+        }).start(({finish})=>console.log(finish));
+        console.log(move);
+    }, [ActivePage,TimeOutID,move])
+
+    // useEffect(()=>{
+    //     if(ActivePage === Position && ActivePage < (listPasge.length - 1)){
+    //         var id = setTimeout(count, 5000);
+    //         setTimeOutPage(ActivePage)
+    //         setTimeOutID(id)
+    //     }
+    // },[ActivePage, Position])
 
     useEffect(()=>{
-        if(ActivePage === Position && ActivePage < (listPasge.length - 1)){
-            setTimeout(() => {
-                count(300,ActivePage + 1)
-            }, 5000);
+        if(TimeOutPage !== ActivePage){
+            clearTimeout(TimeOutID)
+            if(ActivePage === Position && ActivePage < (listPasge.length - 1)){
+                var id = setTimeout(count, 5000);
+                setTimeOutPage(ActivePage)
+                setTimeOutID(id)
+            }
         }
-    },[ActivePage, Position])
-
-    const getLayoutScreen = useCallback((e) => {
-        setScreenHeight(e.nativeEvent.layout.height)
-        setScreenWidth(e.nativeEvent.layout.width)
-    }, [])
+    },[TimeOutPage, TimeOutID, ActivePage])
     return (
         <>
-            <View
-                style={styles.container}>
-                <ImageBackground onLayout={getLayoutScreen} source={bg} style={[styles.bg, { paddingTop: 0, alignItems: 'center' }]}>
-                    {listPasge.map((Page, index) => {
-                        return (
-                            <Page
-                                key={index}
-                                ScreenHeight={ScreenHeight}
-                                ScreenWidth={ScreenWidth}
-                                Position={Position}
-                                index={index + 1}
-                            />
-                        )
-                    })}
+        <View style={[styles.container, {width: ScreenWidth, height: ScreenHeight, position: 'relative', overflow: 'hidden'}]}>
+        {listPasge.map((Page, index) => {
+            return (
+                <Page
+                    key={index}
+                    ScreenHeight={ScreenHeight}
+                    ScreenWidth={ScreenWidth}
+                    Position={move}
+                    index={index + 1}
+                    setDotsPosition={setDotsPosition}
+                />
+            )
+        })}
 
-                    <Dots
-                        ScreenHeight={ScreenHeight}
-                        ActivePage={ActivePage}
-                    />
-                    <Button
-                        ScreenHeight={ScreenHeight}
-                        ScreenWidth={ScreenWidth}
-                        ActivePage={ActivePage}
-                    />
-                    <ControlsPageButton
-                        count={count}
-                        ScreenWidth={ScreenWidth}
-                        ActivePage={ActivePage}
-                    />
-
-                </ImageBackground>
-            </View>
+        <Dots
+            ScreenHeight={ScreenHeight}
+            ScreenWidth={ScreenWidth}
+            ActivePage={ActivePage}
+            DotsPosition={DotsPosition}
+        />
+        <Button
+            ScreenHeight={ScreenHeight}
+            ScreenWidth={ScreenWidth}
+            ActivePage={ActivePage}
+        />
+        <ControlsPageButton
+            count={count}
+            ScreenWidth={ScreenWidth}
+            ActivePage={ActivePage}
+        />
+        </View>
         </>
     );
 }

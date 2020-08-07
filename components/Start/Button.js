@@ -13,10 +13,10 @@ export default function Button({ScreenWidth, ScreenHeight,ActivePage,setActivePa
             ActivePage !== 3 && {transform: [{ scale: 0 }]}
         ]}
         >
-            <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
+            <TouchableOpacity onPress={()=>navigation.replace('Login')}>
                 <LinearGradient
-                    start={[0, 0.5]}
-                    end={1, 0.5}
+                    start={[0,1]}
+                    end={[1,0]}
                     colors={['#e3bb4c', '#edda8b']}
                     style={{  paddingTop: ScreenHeight * 0.01499, paddingBottom: ScreenHeight * 0.01499, alignItems: 'center', borderRadius: 50 ,width: ScreenWidth * 0.4}}>
                     <Text
@@ -30,7 +30,7 @@ export default function Button({ScreenWidth, ScreenHeight,ActivePage,setActivePa
                 </LinearGradient>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>navigation.navigate('Reg')} style={{marginLeft: ScreenWidth * 0.03,paddingTop: ScreenHeight * 0.01499, paddingBottom: ScreenHeight * 0.01499, alignItems: 'center', borderRadius: 50 ,width: ScreenWidth * 0.4, borderWidth: 1, borderColor: '#ebc660'}}>
+            <TouchableOpacity onPress={()=>navigation.replace('Reg')} style={{marginLeft: ScreenWidth * 0.03,paddingTop: ScreenHeight * 0.01499, paddingBottom: ScreenHeight * 0.01499, alignItems: 'center', borderRadius: 50 ,width: ScreenWidth * 0.4, borderWidth: 1, borderColor: '#ebc660'}}>
                 <Text style={{color: '#ebc660', fontSize: 14}}>Đăng ký</Text>
             </TouchableOpacity>
         </View>

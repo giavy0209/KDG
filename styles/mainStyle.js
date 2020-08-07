@@ -7,16 +7,12 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       justifyContent: 'flex-start',
       fontFamily: 'Roboto_400Regular',
-      height: '100%'
+      height: '100%',
     },
     bg: {
       flex: 1,
       resizeMode: "cover",
       justifyContent: "flex-start",
-      paddingTop: 50,
-      paddingLeft: 30,
-      paddingRight: 30,
-      paddingBottom: 20,
       position: 'relative'
     },
     logo: {
