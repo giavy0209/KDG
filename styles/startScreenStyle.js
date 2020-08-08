@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     page : {
         alignItems: 'center',
         top: 0, 
-        position: 'absolute'
     },
     text : {
         color: '#fff',

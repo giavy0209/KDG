@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {ROUTERS,TABS} from '../../routers'
-import { useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useSafeAreaInsets, SafeAreaView} from 'react-native-safe-area-context';
 import { useSelector,useDispatch } from 'react-redux'
 import {actChangeScreenHeight, actChangeScreenWidth} from '../../store/actions'
 
@@ -17,25 +17,13 @@ const { Navigator, Screen } = Stack
 const Tab = createBottomTabNavigator();
 
 const createTab = ()=><Tab.Navigator
+
 tabBarOptions={{
   activeTintColor: '#fac800',
   inactiveTintColor: "#ffffff",
   style: {
     backgroundColor: '#283349',
     borderTopWidth: 0,
-    marginTop: 0,
-    height: 54,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignContent: 'center',
-    
-  },
-  tabStyle: {
-    paddingTop: 10,
-    justifyContent: 'space-around',
-  },
-  labelStyle : {
-    paddingBottom: 10
   }
 }}
 >
@@ -61,19 +49,19 @@ export default function App() {
 
   
   useEffect(()=>{
-    dispatch(actChangeScreenWidth(Dimensions.get('screen').width - left - right))
-    dispatch(actChangeScreenHeight(Dimensions.get('screen').height - top - bottom))
+    dispatch(actChangeScreenWidth(Dimensions.get('screen').width ))
+    dispatch(actChangeScreenHeight(Dimensions.get('screen').height - top))
   },[])
     return (
-      
+      <SafeAreaView>
       <View
         style={[{
           width: ScreenWidth,
           height: ScreenHeight,
-          marginTop: top,
-          marginLeft: left,
-          marginBottom: bottom,
-          marginRight: right}]}
+          // marginTop: top,
+          // marginLeft: left,
+          // marginRight: right
+        }]}
       >
       <NavigationContainer>
       <Navigator
@@ -104,5 +92,6 @@ export default function App() {
         
       </NavigationContainer>
       </View>
+      </SafeAreaView>
     );
 }

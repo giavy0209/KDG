@@ -7,13 +7,13 @@ import { mainStyles } from '../styles/'
 export default function Maincontainer({Component, reqLogin, ...restProps}){
     const isLogin = useSelector(state=>state.isLogin)
     const navigation = useNavigation();
-    // useEffect(()=>{
-    //   if(reqLogin){
-    //     if(!isLogin){
-    //       navigation.replace('Login')
-    //     }
-    //   }
-    // },[isLogin])
+    useEffect(()=>{
+      if(reqLogin){
+        if(!isLogin){
+          navigation.replace('Login')
+        }
+      }
+    },[isLogin])
     return (
       <ImageBackground source={bg} style={[mainStyles.bg,{width: '100%', height: '100%'}]}>
         <ScrollView  style={{width: '100%', height: '100%'}}>

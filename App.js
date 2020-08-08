@@ -41,3 +41,81 @@ export default function App() {
     return (<View></View>)
   }
 }
+
+// import React, { useRef, useState } from "react";
+// import { Animated, Text, View, StyleSheet, Button } from "react-native";
+// console.disableYellowBox = true;
+// export default function App() {
+//   // fadeAnim will be used as the value for opacity. Initial Value: 0
+//   const [Index, setIndex] = useState(0)
+//   const fadeAnim = useRef(new Animated.Value(0)).current;
+//   const fadeIn = () => {
+//     Animated.timing(fadeAnim, {
+//       toValue: Index + 5,
+//       duration: 300,
+//       useNativeDriver: false
+//     }).start();
+//     setIndex(Index + 5)
+//   };
+
+//   const fadeOut = () => {
+//     // Will change fadeAnim value to 0 in 5 seconds
+//     Animated.timing(fadeAnim, {
+//       toValue: Index - 5,
+//       duration: 300,
+//       useNativeDriver: false
+//     }).start();
+//     setIndex(Index  - 5)
+//   };
+//   return (
+//     <View style={styles.container}>
+//       <Animated.View
+//         style={[
+//           styles.fadingContainer,
+//           {
+//             left: fadeAnim // Bind opacity to animated value
+//           }
+//         ]}
+//       >
+//         <Text style={styles.fadingText}>Fading View!</Text>
+//       </Animated.View>
+
+//       <Animated.View
+//         style={[
+//           styles.fadingContainer,
+//           {
+//             left: fadeAnim // Bind opacity to animated value
+//           }
+//         ]}
+//       >
+//         <Text style={styles.fadingText}>Fading View2</Text>
+//       </Animated.View>
+//       <View style={styles.buttonRow}>
+//         <Button title="Fade In" onPress={fadeIn} />
+//         <Button title="Fade Out" onPress={fadeOut} />
+//       </View>
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: "center",
+//     justifyContent: "center"
+//   },
+//   fadingContainer: {
+//     paddingVertical: 8,
+//     paddingHorizontal: 16,
+//     backgroundColor: "powderblue"
+//   },
+//   fadingText: {
+//     fontSize: 28,
+//     textAlign: "center",
+//     margin: 10
+//   },
+//   buttonRow: {
+//     flexDirection: "row",
+//     marginVertical: 16
+//   }
+// });

@@ -2,10 +2,6 @@ import React from 'react';
 import {StyleSheet,Dimensions } from 'react-native';
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        alignContent: 'center', 
         position: 'relative',
     },
     closeButton: {
@@ -14,7 +10,9 @@ const styles = StyleSheet.create({
         right: 5,
         fontSize: 40,
         color: '#ff0000',
-        zIndex: 9
+        zIndex: 9,
+        width: 40,
+        height: 40
     }
 })
 

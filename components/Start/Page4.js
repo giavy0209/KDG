@@ -4,12 +4,12 @@ import {startScreenStyle as styles} from '../../styles/'
 
 import easytext from '../../assets/images/easytext.png'
 import mainImage4 from '../../assets/images/main-image-4.png'
-export default function Page4({ScreenHeight, ScreenWidth,Position,index}){
+export default function Page4({ScreenHeight, ScreenWidth}){
     return(
         <>
         <View style={[
             styles.page,
-            {left: (index - Position) * ScreenWidth - ScreenWidth  , width: ScreenWidth, height: ScreenHeight}
+            {width: ScreenWidth, height: ScreenHeight}
         ]}>
             <Image source={mainImage4} style={[styles.image,{width: ScreenHeight * 0.4497,marginTop: ScreenHeight * 0.1079}]}></Image>
             <Image source={easytext} style={[styles.image,{width : ScreenWidth * 0.46933, marginTop: ScreenHeight * 0.0374812}]}></Image>

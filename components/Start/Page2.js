@@ -3,12 +3,13 @@ import { View, Image, ImageBackground, Text,TouchableOpacity } from 'react-nativ
 import {startScreenStyle as styles} from '../../styles/'
 import securetext from '../../assets/images/securetext.png'
 import mainImage2 from '../../assets/images/main-image-2.png'
-export default function Page2({ScreenHeight, ScreenWidth,Position,index,setDotsPosition}){
+export default function Page2({ScreenHeight, ScreenWidth,setDotsPosition}){
     return(
         <>
-        <View style={[
+        <View 
+        style={[
             styles.page,
-            {left: (index - Position) * ScreenWidth - ScreenWidth  , width: ScreenWidth, height: ScreenHeight}
+            {width: ScreenWidth, height: ScreenHeight}
         ]}>
             <Image source={mainImage2} style={[styles.image,{width: ScreenHeight * 0.4497,marginTop: ScreenHeight * 0.1079}]}></Image>
             <Image source={securetext} style={[styles.image,{width : ScreenWidth * 0.46933, marginTop: ScreenHeight * 0.0374812}]}></Image>

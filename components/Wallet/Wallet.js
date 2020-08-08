@@ -146,18 +146,20 @@ export default function App({ navigation }) {
           </View>
       }
       {IsScannerOpen && <View
-        style={[scannerStyles.container]}
+        style={[scannerStyles.container,
+        { width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }
+        ]}
       >
         <TouchableOpacity
           onPress={() => setIsScannerOpen(false)}
-          style={[scannerStyles.closeButton,]}
+          style={[scannerStyles.closeButton]}
         >
-          <FontAwesomeIcon icon={faTimes} />
+          <FontAwesomeIcon style={{color: '#fff',fontSize: 40}} icon={faTimes} />
         </TouchableOpacity>
         <Camera
           onBarCodeScanned={handleBarCodeScanned}
           ratio='1:1'
-          style={[{ width: Dimensions.get('screen').width, height: Dimensions.get('screen').width }]}
+          style={[{ width: Dimensions.get('screen').width, height: Dimensions.get('screen').width , position: 'absolute', top: '50%',transform: [{translateY: - Dimensions.get('screen').width/2}]}]}
         />
       </View>}
 

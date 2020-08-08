@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux'
 import {actChangeUserData,actChangeLoginStatus} from '../../store/actions'
-import { View, TextInput, Text,  TouchableOpacity,Alert,ImageBackground, Image,ScrollView} from 'react-native';
+import { View, TextInput, Text,  TouchableOpacity,Alert,Image} from 'react-native';
 import {mainStyles as styles} from '../../styles/'
 import calAPI from '../../axios'
 import bg from '../../assets/images/bg.jpg'
