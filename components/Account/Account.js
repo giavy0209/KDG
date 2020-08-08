@@ -6,9 +6,11 @@ export default function App(){
     return(
         <>
         <View style={[mainStyles.container]}>
-                <View style={accountStyle.backgroundHead}>
-                    <Text>Tài khoản</Text>
-                </View>
+            <View style={accountStyle.backgroundHead}>
+                <Image style={accountStyle.backgroundImage} source={image} />
+                <Text>Tài khoản</Text>
+                
+            </View>
         </View>
         </>
     )
