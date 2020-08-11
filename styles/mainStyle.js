@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       justifyContent: 'flex-start',
       fontFamily: 'Roboto_400Regular',
-      height: '100%',
     },
     bg: {
       flex: 1,

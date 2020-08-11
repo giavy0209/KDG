@@ -1,10 +1,9 @@
 import React, { useState, useCallback,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { ScrollView, View, TextInput, Text, TouchableOpacity,Alert,ImageBackground, Image , Linking} from 'react-native';
+import { View, TextInput, Text, TouchableOpacity,Alert, Image , Linking} from 'react-native';
 import {mainStyles as styles} from '../../styles/'
 import calAPI from '../../axios'
-import bg from '../../assets/images/bg.jpg'
 import ticker from '../../assets/images/ticker.png'
 import {transition} from '../../helper'
 
@@ -107,9 +106,15 @@ export default function App({ navigation }) {
             return;
         }
         try {
-            const res = await calAPI.post('/api/user',{email: Email, password: Password})
+            const res = await calAPI.post('/api/register_user',{email: Email, password: Password,register_code : EmailCode})
             console.log(res.data);
+            Alert.alert(
+                "Đăng ký",
+                "Đăng ký thành công",
+            )
+            navigation.replace('Login')
         } catch (error) {
+            console.log(error.response);
             if(error.response.status === 401){
                 Alert.alert(
                     "Đăng ký",
@@ -121,7 +126,20 @@ export default function App({ navigation }) {
     }, [ToggleCheckBox, Email, EmailCode, Password, RePassword, RefCode])
 
     const reqMailCode = useCallback(async ()=>{
-
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(Email.match(mailformat)){
+            try {
+                const res = await calAPI.post('/api/create_register_code ',{email: Email})
+                console.log(res.data);
+            } catch (error) {
+                // console.log(error.response);
+            }
+        }else{
+            Alert.alert(
+                "Đăng ký",
+                "Email không đúng định dạng",
+            )
+        }
     },[Email])
 
     const ToggleShowPassword = useCallback(() => {

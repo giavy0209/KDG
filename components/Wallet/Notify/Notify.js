@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {View, Text, Image} from 'react-native'
-import { mainStyles,notifyStyles } from '../../styles/'
-import {Header2} from '../Header'
-import logo from '../../assets/images/logo.png'
+import { mainStyles,notifyStyles } from '../../../styles/'
+import {Header2} from '../../Header'
+import logo from '../../../assets/images/logo.png'
 export default function App(){
     const [Width , setWidth] = useState(0)
 

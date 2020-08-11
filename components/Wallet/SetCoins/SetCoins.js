@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import {View, Text, Image, TextInput,TouchableOpacity,Switch} from 'react-native'
-import { mainStyles } from '../../styles/'
-import {Header2} from '../Header'
+import { mainStyles } from '../../../styles'
+import {Header2} from '../../Header'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import coin from '../../assets/images/coin.png'
+import coin from '../../../assets/images/coin.png'
 export default function App(){
     const [SearchHeight , setSearchHeight] = useState(0)
     const [Search , setSearch] = useState('')

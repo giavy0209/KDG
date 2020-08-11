@@ -2,25 +2,38 @@ import Start from './components/Start'
 import Reg from './components/Reg'
 import Login from './components/Login'
 import ForgotPassword from './components/ForgotPassword'
-import Notify from './components/Notify'
-import News from './components/News'
-import SetCoins from './components/SetCoins'
 
 import Wallet from './components/Wallet'
+    import Notify from './components/Wallet/Notify'
+    import News from './components/Wallet/News'
+    import SetCoins from './components/Wallet/SetCoins'
+
 import Stake from './components/Stake'
+
 import Swap from './components/Swap'
+
 import Account from './components/Account'
+    import Profile from './components/Account/Profile'
+    import Currency from './components/Account/Currency'
+    import Language from './components/Account/Language'
+    import Display from './components/Account/Display'
+    import Secure from './components/Account/Secure'
+        import ChangePass from './components/Account/Secure/ChangePass'
+        import Pin from './components/Account/Secure/Pin'
+
 
 import tabWallet from './assets/images/tab-wallet.png'
+import tabWalletActive from './assets/images/tab-wallet-active.png'
 import tabStake from './assets/images/tab-stake.png'
 import tabSwap from './assets/images/tab-swap.png'
 import tabAccount from './assets/images/tab-account.png'
+import tabAccountActive from './assets/images/tab-account-active.png'
 const ROUTERS = [
     {
         name: 'Start',
         reqLogin: false,
         title: null,
-        render : Start
+        render : Start,
     },
     {
         name: 'Login',
@@ -58,6 +71,48 @@ const ROUTERS = [
         title: 'Add Coins',
         render : SetCoins
     },
+    {
+        name: 'Profile',
+        reqLogin: true,
+        title: '',
+        render : Profile
+    },
+    {
+        name: 'Currency',
+        reqLogin: true,
+        title: '',
+        render : Currency
+    },
+    {
+        name: 'Language',
+        reqLogin: true,
+        title: '',
+        render : Language
+    },
+    {
+        name: 'Display',
+        reqLogin: true,
+        title: '',
+        render : Display
+    },
+    {
+        name: 'Secure',
+        reqLogin: true,
+        title: '',
+        render : Secure
+    },
+    {
+        name: 'ChangePass',
+        reqLogin: true,
+        title: '',
+        render : ChangePass
+    },
+    {
+        name: 'Pin',
+        reqLogin: true,
+        title: '',
+        render : Pin
+    },
 ];
 
 const TABS = [
@@ -66,6 +121,7 @@ const TABS = [
         title: 'Ví',
         render : Wallet,
         logo: tabWallet,
+        logoActive: tabWalletActive,
         reqLogin: true,
     },
     {
@@ -73,6 +129,7 @@ const TABS = [
         title: 'Staking',
         render : Stake,
         logo: tabStake,
+        logoActive: tabStake,
         reqLogin: true,
     },
     {
@@ -80,6 +137,7 @@ const TABS = [
         title: 'Swap',
         render : Swap,
         logo: tabSwap,
+        logoActive: tabSwap,
         reqLogin: true,
     },
     {
@@ -87,6 +145,7 @@ const TABS = [
         title: 'Me',
         render : Account,
         logo: tabAccount,
+        logoActive: tabAccountActive,
         reqLogin: true,
     },
 ]

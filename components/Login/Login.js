@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux'
 import {actChangeUserData,actChangeLoginStatus} from '../../store/actions'
 import { View, TextInput, Text,  TouchableOpacity,Alert,Image} from 'react-native';
 import {mainStyles as styles} from '../../styles/'
+import AsyncStorage from '@react-native-community/async-storage';
 import calAPI from '../../axios'
-import bg from '../../assets/images/bg.jpg'
 import logo from '../../assets/images/logo.png'
 
 import {transition} from '../../helper'
@@ -48,11 +48,15 @@ export default function App({navigation}) {
 
     const login = useCallback(async() => {
         try {
-            // const res = await calAPI.post('/api/authorize', {email: Email, password: Password})
-            // console.log(res);
-            dispatch(actChangeUserData({email: Email, password: Password}))
-            dispatch(actChangeLoginStatus({isLogin: true}))
-            navigation.replace('Main')
+            const res = (await calAPI.post('/api/authorize', {email: Email, password: Password})).data
+            if(res.status === 1){
+                await AsyncStorage.setItem('isLogin',  JSON.stringify(true))
+                await AsyncStorage.setItem('userData',  JSON.stringify(res.data))
+
+                dispatch(actChangeUserData({email: Email, password: Password}))
+                dispatch(actChangeLoginStatus({isLogin: true}))
+                navigation.replace('Main')
+            }
         } catch (error) {
             console.log(error);
             if(error.response.status === 402){

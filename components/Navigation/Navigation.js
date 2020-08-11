@@ -8,8 +8,13 @@ import {ROUTERS,TABS} from '../../routers'
 import { useSafeAreaInsets, SafeAreaView} from 'react-native-safe-area-context';
 import { useSelector,useDispatch } from 'react-redux'
 import {actChangeScreenHeight, actChangeScreenWidth} from '../../store/actions'
-
 import Maincomponent from '../Maincontainer'
+import AsyncStorage from '@react-native-community/async-storage';
+
+const checkLogin = async () => {
+  var isLogin = JSON.parse(await AsyncStorage.getItem('isLogin'))
+  return isLogin
+}
 
 const Stack = createStackNavigator();
 const { Navigator, Screen } = Stack
@@ -30,7 +35,7 @@ tabBarOptions={{
 
   {TABS.map(tab=>
   <Tab.Screen
-  options={{tabBarIcon: ({focused}) =><Image source={tab.logo} style={[focused && {tintColor: '#c69800'}]}/>}}  
+  options={{tabBarIcon: ({focused}) =><Image source={focused ? tab.logoActive : tab.logo} />}}  
   key={tab.name} 
   name={tab.name}
   >
@@ -47,7 +52,6 @@ export default function App() {
   const ScreenWidth = useSelector(state => state.width)
   const ScreenHeight = useSelector(state => state.height)
 
-  
   useEffect(()=>{
     dispatch(actChangeScreenWidth(Dimensions.get('screen').width ))
     dispatch(actChangeScreenHeight(Dimensions.get('screen').height - top))
@@ -58,9 +62,6 @@ export default function App() {
         style={[{
           width: ScreenWidth,
           height: ScreenHeight,
-          // marginTop: top,
-          // marginLeft: left,
-          // marginRight: right
         }]}
       >
       <NavigationContainer>
@@ -71,6 +72,7 @@ export default function App() {
         >
           {
             ROUTERS.map(Router => {
+              // const isLogin = await checkLogin()
               return (
                 <Screen
                   key={Router.name}
@@ -80,6 +82,18 @@ export default function App() {
                   {props => <Maincomponent {...props} reqLogin={Router.reqLogin} Component={Router.render}></Maincomponent>}
                 </Screen>
               )
+              // else {
+              //   if(Router.reqLogin)return (
+              //     <Screen
+              //       key={Router.name}
+              //       name={Router.name}
+              //       options={{title: Router.title,}}
+              //     > 
+              //       {props => <Maincomponent {...props} reqLogin={Router.reqLogin} Component={Router.render}></Maincomponent>}
+              //     </Screen>
+              //   )
+              //   else return null
+              // }
             })
           }
           <Screen
