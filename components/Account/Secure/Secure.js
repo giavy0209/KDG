@@ -20,13 +20,15 @@ export default function App(){
                     <FontAwesomeIcon color="#8a8c8e" icon={faAngleRight}/>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('Pin')}
+               
                 style={{flexDirection: 'row', justifyContent: 'space-between',paddingVertical: 19, paddingHorizontal: 15, position: 'relative',borderTopColor: '#3b3f49', borderTopWidth: 1}}>
                     <View style={accountStyle.maskOpacity} ></View>
                     <Text style={{fontSize: 14, color: '#ddd9d8'}}>Xác minh danh tính (KYC)</Text>
                     <FontAwesomeIcon color="#8a8c8e" icon={faAngleRight}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between',paddingVertical: 19, paddingHorizontal: 15, position: 'relative',borderTopColor: '#3b3f49', borderTopWidth: 1}}>
+                <TouchableOpacity 
+                onPress={()=>navigation.navigate('Pin')}
+                style={{flexDirection: 'row', justifyContent: 'space-between',paddingVertical: 19, paddingHorizontal: 15, position: 'relative',borderTopColor: '#3b3f49', borderTopWidth: 1}}>
                     <View style={accountStyle.maskOpacity} ></View>
                     <Text style={{fontSize: 14, color: '#ddd9d8'}}>Cài đặt Unlock PIN</Text>
                     <FontAwesomeIcon color="#8a8c8e" icon={faAngleRight}/>

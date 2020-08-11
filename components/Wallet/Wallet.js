@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import {View, Text, TouchableOpacity, Alert, Image, Dimensions,BackHandler,ScrollView } from 'react-native';
 import { Camera } from 'expo-camera';
@@ -33,10 +33,6 @@ export default function App({ navigation }) {
       )
     }
   }, [])
-
-  useEffect(() => {
-    if (!isLogin) navigation.replace('Login')
-  }, [isLogin])
 
   useEffect(()=>{
     BackHandler.addEventListener(

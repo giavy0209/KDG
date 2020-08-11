@@ -6,9 +6,6 @@ import logo from '../../../assets/images/logo.png'
 export default function App(){
     const [Width , setWidth] = useState(0)
 
-    useEffect(()=>{
-        console.log(Width);
-    },[Width])
     return (
         <>
         <View style={mainStyles.container}>

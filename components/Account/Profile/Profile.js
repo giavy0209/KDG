@@ -1,21 +1,30 @@
-import React, { useEffect, useCallback, useState } from 'react'
-import { View, Text, Image, ImageBackground ,Button, TouchableOpacity} from 'react-native'
-
+import React, { useCallback, useState } from 'react'
+import { View, Text, Image, TouchableOpacity} from 'react-native'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-
 import { Header2 } from '../../Header'
-
 import { mainStyles, accountStyle } from '../../../styles'
-
 import defaultAvata from '../../../assets/images/default-avata.webp'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
+
+import {asyncLogout} from '../../../store/actions'
+import { useNavigation } from '@react-navigation/native';
+
 export default function App() {
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+    const [Height, setHeight] = useState(0)
+    const [ContentHeight, setContentHeight] = useState(0)
+    const [ButtonHeight, setButtonHeight] = useState(0)
+    const screenHeight = useSelector(state=>state.height)
+
     const [BlockWidth, setBlockWidth] = useState(0)
     const [ImageWidth, setImageWidth] = useState(0)
     const [image, setImage] = useState(defaultAvata)
+
     const getPermissionAsync = useCallback(async () => {
         if (Constants.platform.ios) {
             const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -36,20 +45,21 @@ export default function App() {
             if (!result.cancelled) {
                 setImage(result);
             }
-
-            console.log(result);
         } catch (E) {
             console.log(E);
         }
     },[])
 
-    useEffect(() => {
+    const handleLogout = useCallback(()=>{
+        dispatch(asyncLogout())
+        .then(()=>{
+        })
+    },[])
 
-    }, [])
     return (
         <>
-            <Header2 title="Hồ sơ cá nhân" />
-            <View style={[mainStyles.container,{paddingHorizontal: 36, paddingTop: 78,}]}>
+            <Header2 setHeight={setHeight} title="Hồ sơ cá nhân" />
+            <View onLayout={e=>setContentHeight(e.nativeEvent.layout.height)} style={[mainStyles.container,{paddingHorizontal: 36, paddingTop: 78,}]}>
                 <View
                 onLayout={e => setBlockWidth(e.nativeEvent.layout.width)}
                 style={{paddingHorizontal: 19, paddingTop: 40, paddingBottom: 18, flexDirection: 'row', justifyContent: 'space-between', position: 'relative'}}>
@@ -68,6 +78,11 @@ export default function App() {
                     </TouchableOpacity>
                 </View>
             </View>
+            <TouchableOpacity 
+            onPress={handleLogout}
+            style={{backgroundColor: '#283349', marginTop: screenHeight - Height - ContentHeight - ButtonHeight}} onLayout={e=>setButtonHeight(e.nativeEvent.layout.height)}>
+                <Text style={{textAlign: 'center', color: '#fac800', fontSize: 14, padding: 20}}>Đăng Xuất</Text>
+            </TouchableOpacity>
         </>
     )
 }

@@ -1,35 +1,58 @@
-import React, { useState, useCallback } from 'react'
-import { View, Text, TouchableOpacity, TextInput,Image } from 'react-native'
-import SmoothPinCodeInput  from 'react-native-smooth-pincode-input'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
+import { View, Text, TouchableOpacity,Switch } from 'react-native'
+
 import {Header2} from '../../../Header'
 import { mainStyles } from '../../../../styles'
+import { useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 export default function App(){
-    const [Pin, setPin] = useState('')
+    const navigation = useNavigation()
+
+    const PIN = useSelector(state => state.pin)
+
+    const [ActivePin, setActivePin] = useState(PIN ? true : false)
+    const [ThumbSwitchColor, setThumbSwitchColor] = useState('')
+    useEffect(()=>{
+        if(ActivePin) setThumbSwitchColor('#ebd889')
+        else setThumbSwitchColor('#ddd9d8')
+    },[ActivePin])
+
+    useEffect(()=>{
+        setTimeout(() => {
+            if(PIN && !ActivePin){
+                setActivePin(true)
+            }else if(!PIN && ActivePin){
+                setActivePin(false)
+            }
+        }, 300);
+    },[PIN,ActivePin])
+
+    useEffect(()=>{
+        if(ActivePin && !PIN){
+            navigation.navigate('SetPin')
+        }
+        if(!ActivePin && PIN){
+            navigation.navigate('RemovePin')
+        }
+    },[ActivePin,PIN])
     return (
         <>
-            <Header2 title="Thay đổi mật khẩu"/>
-            <SmoothPinCodeInput
-            placeholder={<View style={{
-                width: 10,
-                height: 10,
-                borderRadius: 25,
-                backgroundColor: '8a8c8e',
-            }}></View>}
-            mask={<View style={{
-                width: 10,
-                height: 10,
-                borderRadius: 25,
-                backgroundColor: 'ddd9d8',
-            }}></View>}
-            maskDelay={1000}
-            password={true}
-            cellStyle={null}
-            cellStyleFocused={null}
-            value={Pin}
-            codeLength={6}
-            keyboardType="number-pad"
-            onTextChange={code => setPin(code)}
-            />
+            <Header2 title="Cài đặt Unlock PIN"/>
+            <View style={[mainStyles.container,{padding: 14}]}>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',paddingVertical: 10}}>
+                    <Text style={{color: '#ddd9d8', fontSize: 14}}>Cài đặt Unlock PIN</Text>
+                    <Switch 
+                    value={ActivePin}
+                    onValueChange={value=>setActivePin(value)}
+                    thumbColor={ThumbSwitchColor}
+                    trackColor={{true: '#fff8da', false: '#8a8c8e'}}
+                    />
+                </View>
+                <View style={{marginTop: 17, borderTopColor: '#2a2e3a', borderTopWidth: 1,paddingTop: 15}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('ChangePin')} disabled={!ActivePin}><Text style={{color: ActivePin ? '#ddd9d8' : '#4c4d54'}}>Đổi mã PIN</Text></TouchableOpacity>
+                    <Text style={{color: '#8a8c8e', marginTop:22}}>Trong trường hợp quên mã PIN ứng dụng bạn phải gỡ bỏ và cài đặt lại ứng dụng để xóa mã PIN cũ.</Text>
+                </View>
+            </View>
         </>
     )
 }

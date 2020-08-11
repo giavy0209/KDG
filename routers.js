@@ -2,6 +2,7 @@ import Start from './components/Start'
 import Reg from './components/Reg'
 import Login from './components/Login'
 import ForgotPassword from './components/ForgotPassword'
+import Tabs from './components/Tabs'
 
 import Wallet from './components/Wallet'
     import Notify from './components/Wallet/Notify'
@@ -20,6 +21,9 @@ import Account from './components/Account'
     import Secure from './components/Account/Secure'
         import ChangePass from './components/Account/Secure/ChangePass'
         import Pin from './components/Account/Secure/Pin'
+            import SetPin from './components/Account/Secure/Pin/SetPin'
+            import ChangePin from './components/Account/Secure/Pin/ChangePin'
+            import RemovePin from './components/Account/Secure/Pin/RemovePin'
 
 
 import tabWallet from './assets/images/tab-wallet.png'
@@ -28,90 +32,153 @@ import tabStake from './assets/images/tab-stake.png'
 import tabSwap from './assets/images/tab-swap.png'
 import tabAccount from './assets/images/tab-account.png'
 import tabAccountActive from './assets/images/tab-account-active.png'
+
+
+
 const ROUTERS = [
     {
         name: 'Start',
         reqLogin: false,
         title: null,
         render : Start,
+        needFirstTime: true,
+        needInMain: true
     },
     {
         name: 'Login',
         reqLogin: false,
         title: 'Đăng nhập',
-        render : Login
+        render : Login,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'ForgotPassword',
         reqLogin: false,
         title: 'Quên mật khẩu',
-        render : ForgotPassword
+        render : ForgotPassword,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Reg',
         reqLogin: false,
         title: 'Đăng ký',
-        render : Reg
+        render : Reg,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'Main',
+        reqLogin: true,
+        title: null,
+        render : Tabs,
+        needFirstTime: false,
+        needInMain: false
     },
     {
         name: 'Notify',
         reqLogin: true,
         title: 'Thông báo',
-        render : Notify
+        render : Notify,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'News',
         reqLogin: true,
         title: 'Thông báo',
-        render : News
+        render : News,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'SetCoins',
         reqLogin: true,
         title: 'Add Coins',
-        render : SetCoins
+        render : SetCoins,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Profile',
         reqLogin: true,
         title: '',
-        render : Profile
+        render : Profile,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Currency',
         reqLogin: true,
         title: '',
-        render : Currency
+        render : Currency,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Language',
         reqLogin: true,
         title: '',
-        render : Language
+        render : Language,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Display',
         reqLogin: true,
         title: '',
-        render : Display
+        render : Display,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Secure',
         reqLogin: true,
         title: '',
-        render : Secure
+        render : Secure,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'ChangePass',
         reqLogin: true,
         title: '',
-        render : ChangePass
+        render : ChangePass,
+        needFirstTime: false,
+        needInMain: true
     },
     {
         name: 'Pin',
         reqLogin: true,
         title: '',
-        render : Pin
+        render : Pin,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'SetPin',
+        reqLogin: true,
+        title: '',
+        render : SetPin,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'ChangePin',
+        reqLogin: true,
+        title: '',
+        render : ChangePin,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'RemovePin',
+        reqLogin: true,
+        title: '',
+        render : RemovePin,
+        needFirstTime: false,
+        needInMain: true
     },
 ];
 

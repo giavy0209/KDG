@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {View, Text, Image} from 'react-native'
 import { mainStyles } from '../../../styles/'
 import {Header2} from '../../Header'
 import postImage from '../../../assets/images/post-image.jpg'
 export default function App(){
-    const [Width , setWidth] = useState(0)
 
-    useEffect(()=>{
-        console.log(Width);
-    },[Width])
     return (
         <>
         <View style={mainStyles.container}>

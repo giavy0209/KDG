@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
-import React from 'react';
-import {View, ImageBackground,ScrollView} from 'react-native'
+import React, { useEffect } from 'react';
+import {View} from 'react-native'
 import { Provider} from 'react-redux'
 import store from './store'
 import Navigation from './components/Navigation'
+import AsyncStorage from '@react-native-community/async-storage';
 import { SafeAreaProvider} from 'react-native-safe-area-context';
-
 import {
   useFonts,
   Roboto_300Light_Italic,
@@ -18,6 +18,7 @@ import {
   RobotoCondensed_300Light
 } from '@expo-google-fonts/roboto-condensed';
 
+console.disableYellowBox = true;
 export default function App() {
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
@@ -27,6 +28,13 @@ export default function App() {
     Roboto_500Medium,
     Roboto_700Bold,
   });
+
+  useEffect(()=>{
+    async function setFirstTime(){
+      await AsyncStorage.setItem('isNotFirstTime', JSON.stringify(true))
+    }setFirstTime()
+  },[])
+
   if (fontsLoaded) {
     return (
     <SafeAreaProvider>

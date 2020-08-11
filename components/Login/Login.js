@@ -2,11 +2,9 @@ import React, { useState, useCallback , useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux'
-import {actChangeUserData,actChangeLoginStatus} from '../../store/actions'
+import {actChangeUserData,actChangeLoginStatus,asyncLogin} from '../../store/actions'
 import { View, TextInput, Text,  TouchableOpacity,Alert,Image} from 'react-native';
 import {mainStyles as styles} from '../../styles/'
-import AsyncStorage from '@react-native-community/async-storage';
-import calAPI from '../../axios'
 import logo from '../../assets/images/logo.png'
 
 import {transition} from '../../helper'
@@ -46,27 +44,12 @@ export default function App({navigation}) {
         }
     },[PasswordFocus])
 
-    const login = useCallback(async() => {
-        try {
-            const res = (await calAPI.post('/api/authorize', {email: Email, password: Password})).data
-            if(res.status === 1){
-                await AsyncStorage.setItem('isLogin',  JSON.stringify(true))
-                await AsyncStorage.setItem('userData',  JSON.stringify(res.data))
-
-                dispatch(actChangeUserData({email: Email, password: Password}))
-                dispatch(actChangeLoginStatus({isLogin: true}))
-                navigation.replace('Main')
-            }
-        } catch (error) {
-            console.log(error);
-            if(error.response.status === 402){
-                Alert.alert(
-                    "Đăng Nhập",
-                    "Sai tên dăng nhập hoặc mật khẩu",
-                )
-                return;
-            }
-        }
+    const login = useCallback(() => {
+        dispatch(asyncLogin({email: Email, password: Password}))
+        .then(()=>{
+            
+        })
+        .catch(console.log)
     }, [Email, Password])
 
     const ToggleShowPassword = useCallback(() => {
