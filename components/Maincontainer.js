@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {ImageBackground, ScrollView,} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -9,6 +9,9 @@ import { useNavigation } from '@react-navigation/native'
 export default function Maincontainer({Component,route ,reqLogin, ...restProps}){
     const isLogin = useSelector(state=>state.isLogin)
     const navigation = useNavigation()
+    
+    const [OutScrollView, setOutScrollView] = useState(null)
+
     // const checkLogin = useCallback(async ()=>{
     //   if(isLogin){
     //     if(!reqLogin){
@@ -31,10 +34,11 @@ export default function Maincontainer({Component,route ,reqLogin, ...restProps})
     //   checkLogin()
     // },[])
     return (
-      <ImageBackground source={bg} style={[mainStyles.bg,{width: '100%', height: '100%'}]}>
-        <ScrollView  style={{width: '100%', height: '100%',position: 'relative'}}>
-          <Component {...restProps}/>
+      <ImageBackground source={bg} style={[mainStyles.bg,{width: '100%', height: '100%',position: 'relative'}]}>
+        <ScrollView>
+          <Component setOutScrollView={setOutScrollView} {...restProps}/>
         </ScrollView>
+        {OutScrollView && OutScrollView}
       </ImageBackground>
     )
 }

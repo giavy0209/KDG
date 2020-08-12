@@ -24,6 +24,11 @@ import Account from './components/Account'
             import SetPin from './components/Account/Secure/Pin/SetPin'
             import ChangePin from './components/Account/Secure/Pin/ChangePin'
             import RemovePin from './components/Account/Secure/Pin/RemovePin'
+        import KYC from './components/Account/Secure/KYC'
+            import StartKYC from './components/Account/Secure/KYC/StartKYC'
+                import Upload1 from './components/Account/Secure/KYC/StartKYC/Upload1'
+                import Upload2 from './components/Account/Secure/KYC/StartKYC/Upload2'
+        
 
 
 import tabWallet from './assets/images/tab-wallet.png'
@@ -177,6 +182,38 @@ const ROUTERS = [
         reqLogin: true,
         title: '',
         render : RemovePin,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'KYC',
+        reqLogin: true,
+        title: '',
+        render : KYC,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'StartKYC',
+        reqLogin: true,
+        title: '',
+        render : StartKYC,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'Upload1',
+        reqLogin: true,
+        title: '',
+        render : Upload1,
+        needFirstTime: false,
+        needInMain: true
+    },
+    {
+        name: 'Upload2',
+        reqLogin: true,
+        title: '',
+        render : Upload2,
         needFirstTime: false,
         needInMain: true
     },

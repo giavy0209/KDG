@@ -8,6 +8,22 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       fontFamily: 'Roboto_400Regular',
     },
+    color1:{
+      color: '#8a8c8e'
+    },
+    color2:{
+      color: '#ddd9d8'
+    },
+    fontsize12: {
+      fontSize: 12
+    },
+    fontsize13: {
+      fontSize: 13
+    },
+    
+    fontsize14: {
+      fontSize: 14
+    },
     bg: {
       flex: 1,
       resizeMode: "cover",
