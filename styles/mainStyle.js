@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     color2:{
       color: '#ddd9d8'
     },
+    color3:{
+      color: '#fac800'
+    },
     fontsize12: {
       fontSize: 12
     },

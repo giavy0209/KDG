@@ -4,7 +4,9 @@ import { View,Text, TouchableOpacity,Image } from 'react-native'
 import { useSelector } from 'react-redux'
 import warning from '../../../../../assets/images/warn.png'
 import { LinearGradient } from 'expo-linear-gradient'
-export default function App({setOutScrollView}){
+import { useNavigation } from '@react-navigation/native'
+export default function App({setOutScrollView,SelectedID}){
+    const navigation = useNavigation()
     const screenHeight = useSelector(state=>state.height)
     const screenWidth = useSelector(state=>state.width)
     const [Height, setHeight] = useState(0)
@@ -20,7 +22,11 @@ export default function App({setOutScrollView}){
                     <Image source={warning}/>
                     <Text style={{color: '#ddd9d8',fontSize: 14,textAlign: 'center', marginTop: 30}}>Bạn bắt buộc phải cung cấp tên chính chủ và trùng khớp với thông tin trong CMND/Hộ chiếu?</Text>
                     <View style={{flexDirection:'row',marginTop: 25}}>
-                        <TouchableOpacity style={{flex: 1, borderRadius: 8, overflow: 'hidden',width: '50%',}}>
+                        <TouchableOpacity 
+                        onPress={()=>{
+                            SelectedID === 'Số CMND' || SelectedID === 'Bằng lái xe' ? navigation.navigate('Upload1') : navigation.navigate('Upload2')
+                        }}
+                        style={{flex: 1, borderRadius: 8, overflow: 'hidden',width: '50%',}}>
                             <LinearGradient
                             start={[0,1]}
                             end={[1,0]}

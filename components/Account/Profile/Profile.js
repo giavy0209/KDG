@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { View, Text, Image, TouchableOpacity} from 'react-native'
+import { View, Text, Image, TouchableOpacity,Alert} from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,11 +11,9 @@ import { mainStyles, accountStyle } from '../../../styles'
 import defaultAvata from '../../../assets/images/default-avata.webp'
 
 import {asyncLogout} from '../../../store/actions'
-import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
     const dispatch = useDispatch()
-    const navigation = useNavigation()
     const [Height, setHeight] = useState(0)
     const [ContentHeight, setContentHeight] = useState(0)
     const [ButtonHeight, setButtonHeight] = useState(0)
@@ -29,7 +27,7 @@ export default function App() {
         if (Constants.platform.ios) {
             const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
             if (status !== 'granted') {
-                alert('Sorry, we need camera roll permissions to make this work!');
+                Alert.alert('Tải hình','Bạn cần cấp quyền để ứng dụng tải hình lên');
             }else pickImage()
         }else pickImage()
     }, []);
